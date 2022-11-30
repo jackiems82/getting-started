@@ -1,4 +1,4 @@
-<h3>Competitions</h3>
+<h1>Competitions</h1>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayoutGap="16px">
   <mat-form-field appearance="fill">
@@ -28,7 +28,7 @@
     <div class="header" (click)="sortColumn('score')">Score</div>
     <div class="header" (click)="sortColumn('awayTeam')">Away</div>
     <div class="header" (click)="sortColumn('kickoffTime')">Kickoff</div>
-    <div *ngIf="!matchList.length; else elseBlock" class="italic">
+    <div *ngIf="!matchList.length; else elseBlock" class="help-text">
       Please select Competition and Match Day above.
     </div>
     <ng-template #elseBlock>
