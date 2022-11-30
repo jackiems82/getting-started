@@ -1,0 +1,43 @@
+<h3>Competitions</h3>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayoutGap="16px">
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a Competition</mat-label>
+    <mat-select formControlName="competition" (selectionChange)="onCompetitionChanged($event.value)">
+      <mat-option [value]="competition" *ngFor="let competition of competitions">{{competition.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a Match Day</mat-label>
+    <mat-select formControlName="matchday">
+      <mat-option [value]="matchday" *ngFor="let matchday of matchdays">{{matchday}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button type="submit" mat-button color="primary" [disabled]="form.invalid">Show Matches</button>
+</form>
+
+<div *ngIf="isLoading; else elseBlock">
+  Loading ...
+</div>
+<ng-template #elseBlock>
+  <div class="grid">
+    <div class="header" (click)="sortColumn('homeTeam')">Home</div>
+    <div class="header" (click)="sortColumn('score')">Score</div>
+    <div class="header" (click)="sortColumn('awayTeam')">Away</div>
+    <div class="header" (click)="sortColumn('kickoffTime')">Kickoff</div>
+    <div *ngIf="!matchList.length; else elseBlock" class="italic">
+      Please select Competition and Match Day above.
+    </div>
+    <ng-template #elseBlock>
+      <ng-container *ngFor="let match of matchList">
+        <div>{{match.homeTeam}}</div>
+        <div>{{match.score}}</div>
+        <div>{{match.awayTeam}}</div>
+        <div>{{match.kickoffTime}}</div>
+      </ng-container>
+    </ng-template>
+  </div>
+</ng-template>
