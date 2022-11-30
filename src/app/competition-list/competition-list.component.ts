@@ -74,6 +74,7 @@ export class CompetitionListComponent implements OnInit {
         kickoffTime: `${new Date(m.utcDate).getHours().toString().padStart(2, '0')}:${new Date(m.utcDate).getMinutes().toString().padStart(2, '0')}`
       }
     })
-      .sort(this.sort));
+      .sort((a, b) => this.sort(a, b, 'kickoffTime'))
+      .reverse());
   }
-}
+} 
